@@ -2,6 +2,7 @@ import TimeUpdated from "../utils/formatDate";
 import Genres from "./genres";
 import { genres } from "../data/genreData";
 import GetGenreIds from "../utils/getGenreIds";
+import { Link } from "react-router-dom";
 
 /**
  * Renders a podcast card displaying podcast details such as:

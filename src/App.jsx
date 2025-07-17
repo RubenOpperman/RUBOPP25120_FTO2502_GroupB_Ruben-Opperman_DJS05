@@ -4,11 +4,14 @@ import Navbar from "./components/header";
 import Filter from "./components/filter";
 import MainContent from "./components/mainContent";
 import PageNav from "./components/PageNav";
+import PodcastDetails from "./components/PodcastDetails";
 
 import { genres } from "./data/genreData";
 import { fetchPodcastData } from "./data/podcastData";
 import GetGenreIds from "./utils/getGenreIds";
 import "./App.css";
+
+import { Routes, Route, Link, useLocation } from "react-router-dom";
 
 /**
  * Main application component for the Podcast Explorer.
@@ -23,6 +26,10 @@ import "./App.css";
  * @returns {JSX.Element} The rendered application
  */
 function App() {
+  const location = useLocation();
+  console.log(location);
+  const isDetailPage = location.pathname.startsWith("/podcast/");
+
   /** @type {[Object[], Function]} Podcast data state */
   const [podcastData, setPodcastData] = useState([]);
 
@@ -121,38 +128,54 @@ function App() {
 
   return (
     <>
-      <Navbar onChange={handleNavChange} />
-      <Filter sort={handleAsc} genreFilter={handleGenreFilter} />
-
-      {isLoading ? (
-        <div className="fixed inset-0 flex justify-center items-center bg-white z-50">
-          <div className="text-xl font-bold animate-pulse">
-            Loading Podcasts...
-          </div>
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 bg-Background">
-          {currentItems.map((podcast) => (
-            <MainContent
-              key={podcast.id}
-              id={podcast.id}
-              title={podcast.title}
-              description={podcast.description}
-              seasons={podcast.seasons}
-              img={podcast.image}
-              updated={podcast.updated}
-              genres={podcast.genres}
-            />
-          ))}
-        </div>
+      {!isDetailPage && <Navbar onChange={handleNavChange} />}
+      {!isDetailPage && (
+        <Filter sort={handleAsc} genreFilter={handleGenreFilter} />
       )}
+      <Routes>
+        <Route
+          path="/"
+          element={
+            isLoading ? (
+              <div className="fixed inset-0 flex justify-center items-center bg-white z-50">
+                <div className="text-xl font-bold animate-pulse">
+                  Loading Podcasts...
+                </div>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 bg-Background">
+                {currentItems.map((podcast) => (
+                  <Link key={podcast.id} to={`/podcast/${podcast.id}`}>
+                    <MainContent
+                      key={podcast.id}
+                      id={podcast.id}
+                      title={podcast.title}
+                      description={podcast.description}
+                      seasons={podcast.seasons}
+                      img={podcast.image}
+                      updated={podcast.updated}
+                      genres={podcast.genres}
+                    />
+                  </Link>
+                ))}
+              </div>
+            )
+          }
+        />
+        <Route
+          path="/podcast/:id"
+          element={<PodcastDetails data={podcastData} />}
+        />
+      </Routes>
 
-      <PageNav
-        currentPage={currentPage}
-        totalPages={totalPages}
-        prevBtn={prevBtn}
-        nextBtn={nextBtn}
-      />
+      {!isDetailPage && (
+        <PageNav
+          currentPage={currentPage}
+          totalPages={totalPages}
+          prevBtn={prevBtn}
+          nextBtn={nextBtn}
+        />
+      )}
     </>
   );
 }
