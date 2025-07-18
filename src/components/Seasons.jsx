@@ -1,4 +1,5 @@
 import React from "react";
+import Episodes from "./Episodes";
 
 export default function Seasons({ id }) {
   const [loading, setLoading] = React.useState(true);
@@ -51,26 +52,26 @@ export default function Seasons({ id }) {
           </form>
         </div>
 
-        <div className="border-gray-500 border-2 p-4 flex">
-          <div className="">
-            <img
-              src={podcast.seasons[selectedSeason - 1].image}
-              alt="podcast img"
-              className="w-full"
-            />
-          </div>
+        <div className="border-gray-500 border-2 p-4 flex ">
+          <img
+            src={podcast.seasons[selectedSeason - 1].image}
+            alt="podcast img"
+            className="w-[15vw]"
+          />
+
           <div>
             <h1>
               Season {selectedSeason}:{" "}
               {podcast.seasons[selectedSeason - 1].title}
             </h1>
             <p className="line-clamp-1">{podcast.description}</p>
-            <div>
+            <div className="flex gap-10">
               <p>Episodes</p>
               <p>Released {new Date(podcast.updated).getFullYear()}</p>
             </div>
           </div>
         </div>
+        <Episodes season={podcast.seasons[selectedSeason - 1].episodes} />
       </div>
     </>
   );
