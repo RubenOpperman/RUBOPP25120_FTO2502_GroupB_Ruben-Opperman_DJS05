@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 /**
  * Navigation bar component for the Podcast Explorer app.
@@ -13,7 +13,7 @@ import { useState } from "react";
  * @returns {JSX.Element} The rendered navigation bar
  */
 
-export default function Navbar({ onChange }) {
+export default function Navbar({ onChange, search }) {
   /** @type {[boolean, Function]} State to toggle search bar visibility */
   const [searchBar, setSearchBar] = useState(false);
   /**
@@ -29,6 +29,9 @@ export default function Navbar({ onChange }) {
   function ToggleSearch() {
     setSearchBar((prevSearchBarState) => !prevSearchBarState);
   }
+  useEffect(() => {
+    if (search !== "") setSearchBar(true);
+  }, [search]);
 
   return (
     <>
@@ -51,10 +54,12 @@ export default function Navbar({ onChange }) {
               }}
             >
               <input
+                value={search}
                 onChange={handleInputChange}
                 id="search"
                 type="text"
                 placeholder="search podcast title"
+                className="outline-none"
               />
             </form>
           </div>

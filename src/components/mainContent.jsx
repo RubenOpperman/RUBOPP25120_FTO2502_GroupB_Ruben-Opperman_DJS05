@@ -2,58 +2,68 @@ import TimeUpdated from "../utils/formatDate";
 import Genres from "./genres";
 import { genres } from "../data/genreData";
 import GetGenreIds from "../utils/getGenreIds";
-import { Link } from "react-router-dom";
 
 /**
- * Renders a podcast card displaying podcast details such as:
- * - Image, title, number of seasons, genre tags, and last updated date.
+ * Podcast card component displaying:
+ * - Cover image
+ * - Title
+ * - Number of seasons
+ * - Genre tags
+ * - Last updated date
  *
  * @component
- * @param {Object} props - The properties passed to the component.
- * @param {string} props.id - Unique identifier for the podcast.
- * @param {string} props.title - Title of the podcast.
- * @param {string} props.description - Description of the podcast (unused here but passed).
- * @param {number} props.seasons - Number of seasons available.
- * @param {string} props.img - Image URL for the podcast cover.
- * @param {string} props.updated - Last updated date in ISO format.
- * @param {number[]} props.genres - Array of genre IDs associated with the podcast.
- *
- * @returns {JSX.Element} The rendered podcast card.
+ * @param {Object} props
+ * @param {string} props.id - Podcast ID
+ * @param {string} props.title - Podcast title
+ * @param {string} props.description - Podcast description (unused here)
+ * @param {number} props.seasons - Number of seasons
+ * @param {string} props.img - Podcast cover image URL
+ * @param {string} props.updated - ISO date string
+ * @param {number[]} props.genres - Genre ID array
+ * @returns {JSX.Element}
  */
-export default function MainContent(props) {
-  const updateDate = TimeUpdated(props.updated);
-  const genreList = GetGenreIds(props.genres, genres);
+export default function MainContent({
+  id,
+  title,
+  description,
+  seasons,
+  image,
+  updated,
+  genres: genreIds,
+}) {
+  const updateDate = TimeUpdated(updated);
+  const genreList = GetGenreIds(genreIds, genres);
 
   return (
-    <div className="rounded-lg border-2 border-[#9CA3AF] bg-Podcast-card p-2 shadow-lg  font-serif ">
+    <div className="rounded-lg border-2 border-gray-400 bg-Podcast-card p-2 shadow-lg font-serif">
       <div className="p-2">
-        <div className="w-full h-full  mx-auto rounded-lg mb-2 overflow-hidden">
+        <div className="w-full h-full mx-auto rounded-lg mb-2 overflow-hidden">
           <img
-            src={props.img}
+            src={image}
             className="w-full h-full object-cover block rounded-2xl"
-            alt="podcast image"
+            alt={`Cover for ${title}`}
           />
         </div>
 
-        <h2 className="text-lg font-bold p-1">{props.title}</h2>
+        <h2 className="text-lg font-bold p-1">{title}</h2>
 
-        <div className="flex mb-2">
+        <div className="flex items-center mb-2">
           <img
-            className="w-5 pr-2 h-auto"
+            className="w-5 h-5 mr-2"
             src="src/assets/gray-calendar-25911.svg"
-            alt="grey calander"
+            alt="Calendar icon"
           />
-          <p className="text-sm text-gray-700 p-1 font-medium">
-            {props.seasons} seasons
+          <p className="text-sm text-gray-700 font-medium">
+            {seasons} season{seasons !== 1 ? "s" : ""}
           </p>
         </div>
 
-        <div id="genre-container" className="flex flex-wrap gap-2 mb-2">
+        <div className="flex flex-wrap gap-2 mb-2">
           <Genres genreList={genreList} />
         </div>
 
-        <p className="text-xs text-gray-500 py-1 font-semibold">
-          updated : {updateDate}
+        <p className="text-xs text-gray-500 font-semibold">
+          Updated: {updateDate}
         </p>
       </div>
     </div>
