@@ -34,13 +34,13 @@ export default function Seasons({ id }) {
     <>
       <div>
         <div className="flex">
-          <div>Current Season</div>
+          <div className="text-white text-3xl">Current Season</div>
 
-          <form className=" pr-10 ml-auto">
+          <form className=" pr-10 ml-auto ">
             <select
               name="season"
               id="season"
-              className="mb-4 p-2 border rounded"
+              className="mb-4 p-2 border rounded bg-Podcast-card"
               onChange={handleSelectedSeason}
             >
               {podcast.seasons.map((season) => (
@@ -51,27 +51,35 @@ export default function Seasons({ id }) {
             </select>
           </form>
         </div>
+        <div className=" border-gray-400 border-2 rounded-xl bg-Podcast-card shadow-lg">
+          <div className="  p-4 flex rounded-lg font-serif gap-4 mb-10">
+            <img
+              src={podcast.seasons[selectedSeason - 1].image}
+              alt="podcast img"
+              className="w-[10vw] rounded-2xl "
+            />
 
-        <div className="border-gray-500 border-2 p-4 flex ">
-          <img
-            src={podcast.seasons[selectedSeason - 1].image}
-            alt="podcast img"
-            className="w-[15vw]"
-          />
-
-          <div>
-            <h1>
-              Season {selectedSeason}:{" "}
-              {podcast.seasons[selectedSeason - 1].title}
-            </h1>
-            <p className="line-clamp-1">{podcast.description}</p>
-            <div className="flex gap-10">
-              <p>Episodes</p>
-              <p>Released {new Date(podcast.updated).getFullYear()}</p>
+            <div>
+              <h1 className="font-bold text-xl mb-3">
+                Season {selectedSeason}:{" "}
+                {podcast.seasons[selectedSeason - 1].title}
+              </h1>
+              <p className="line-clamp-1 text-lg text-Font-primary-color mb-3">
+                {podcast.description}
+              </p>
+              <div className="flex gap-10 text-secondary-font-color text-md font-medium ">
+                <p>
+                  {podcast.seasons[selectedSeason - 1].episodes.length} Episodes
+                </p>
+                <p>Released {new Date(podcast.updated).getFullYear()}</p>
+              </div>
             </div>
           </div>
+          <Episodes
+            seasonImg={podcast.seasons[selectedSeason - 1].image}
+            season={podcast.seasons[selectedSeason - 1].episodes}
+          />
         </div>
-        <Episodes season={podcast.seasons[selectedSeason - 1].episodes} />
       </div>
     </>
   );

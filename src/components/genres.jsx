@@ -12,7 +12,7 @@ export default function Genres(props) {
       {props.genreList.map((genre, index) => (
         <span
           key={index}
-          className="bg-gray-200 text-gray-800 px-3 py-1 rounded-full text-sm font-medium m-1"
+          className="bg-gray-200 font-bold  text-gray-800 px-3 py-1 rounded-full text-sm  m-1"
         >
           {genre}
         </span>

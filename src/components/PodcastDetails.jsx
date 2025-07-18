@@ -14,42 +14,51 @@ export default function PodcastDetail({ data }) {
   const genreList = GetGenreIds(podcast.genres, genres);
 
   return (
-    <div className="p-6">
+    <div className="p-6 bg-Background">
       <Link
         to="/"
         className="text-white text-4xl bg-NavBar-bg rounded-full px-4 mb-4 py-2"
       >
         ←
       </Link>
-      <div className="flex my-10">
-        <div className="px-5">
-          <img src={podcast.image} alt={podcast.title} className="w-50 " />
-        </div>
+      <div className="flex my-10 border-2 gap-5 p-10 rounded-lg  border-gray-400 bg-Podcast-card shadow-lg font-serif">
+        <img
+          src={podcast.image}
+          alt={podcast.title}
+          className="w-100 h-100 object-cover rounded-2xl "
+        />
+
         <div>
           <div className="mb-5">
-            <h1 className="text-2xl font-bold">{podcast.title}</h1>
-            <p>{podcast.description}</p>
+            <h1 className="text-3xl font-bold mb-5">{podcast.title}</h1>
+            <p className="text-lg font-medium  text-Font-primary-color">
+              {podcast.description}
+            </p>
           </div>
 
           <div className="">
             <div className="gap-10 grid grid-cols-2">
               <div id="genre-container" className=" flex-wrap  mb-4">
-                <p>GENRES</p>
+                <p className="text-secondary-font-color ">GENRES</p>
                 <Genres genreList={genreList} />
               </div>
 
               <div className=" flex-wrap  mb-4">
-                <p>LAST UPDATED</p>
-                <p> {new Date(podcast.updated).toLocaleDateString()}</p>
+                <p className="text-secondary-font-color">LAST UPDATED</p>
+                <p className="font-bold ">
+                  {" "}
+                  {new Date(podcast.updated).toLocaleDateString()}
+                </p>
               </div>
 
               <div className=" flex-wrap  mb-4">
-                <p>TOTAL SEASONS</p>
-                <p>{podcast.seasons} Seasons</p>
+                <p className="text-secondary-font-color">TOTAL SEASONS</p>
+                <p className="font-bold ">{podcast.seasons} Seasons</p>
               </div>
 
               <div className=" flex-wrap  mb-4">
-                <p>TOTAL EPISODES</p>
+                <p className="text-secondary-font-color">TOTAL EPISODES</p>
+                <p>{}</p>
               </div>
             </div>
           </div>
