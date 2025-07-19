@@ -13,7 +13,7 @@ export default function PodcastDetail({ data }) {
 
   const podcast = data.find((p) => p.id === id);
 
-  if (!podcast) return <div className="p-4">Podcast not found</div>;
+  if (!podcast) return <div className="p-4 text-4xl">Podcast not found</div>;
 
   const genreList = GetGenreIds(podcast.genres, genres);
 
@@ -21,7 +21,7 @@ export default function PodcastDetail({ data }) {
     <div className="p-6 bg-Background">
       <Link
         to="/"
-        className="text-white text-4xl bg-NavBar-bg rounded-full px-4 mb-4 py-2"
+        className="text-white text-4xl bg-NavBar-bg rounded-full px-4 mb-4 pb-2 pt-1"
       >
         ←
       </Link>

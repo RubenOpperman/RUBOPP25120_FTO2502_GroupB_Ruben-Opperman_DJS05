@@ -4,7 +4,7 @@ export default function PageNav({ currentPage, totalPages, nextBtn, prevBtn }) {
       <button
         onClick={prevBtn}
         disabled={currentPage === 1}
-        className="px-4 py-2 bg-white rounded disabled:opacity-50"
+        className="px-4 py-2 bg-white rounded disabled:opacity-50 outline-none cursor-pointer"
       >
         Previous
       </button>
@@ -14,7 +14,7 @@ export default function PageNav({ currentPage, totalPages, nextBtn, prevBtn }) {
       <button
         onClick={nextBtn}
         disabled={currentPage === totalPages}
-        className="px-4 py-2 bg-white  rounded disabled:opacity-50"
+        className="px-4 py-2 bg-white  rounded disabled:opacity-50 outline-none cursor-pointer"
       >
         Next
       </button>

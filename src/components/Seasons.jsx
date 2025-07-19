@@ -5,39 +5,67 @@ export default function Seasons({ id, setOnEpisodeCount }) {
   const [loading, setLoading] = React.useState(true);
   const [podcast, setPodcast] = React.useState(null);
   const [selectedSeason, setSelectedSeason] = React.useState(null);
+  const [error, setError] = React.useState();
 
-  function handleSelectedSeason(event) {
-    const seasonId = Number(event.target.value);
+  function handleSelectedSeason(e) {
+    const seasonId = Number(e.target.value);
     setSelectedSeason(seasonId);
   }
 
   React.useEffect(() => {
     async function loadPodcast() {
-      setLoading(true);
-      const response = await fetch(`https://podcast-api.netlify.app/id/${id}`);
-      if (!response.ok) {
-        throw new Error("podcast not found");
+      try {
+        setLoading(true);
+        setError(null);
+
+        const response = await fetch(
+          `https://podcast-api.netlify.app/id/${id}`
+        );
+        if (!response.ok) {
+          throw new Error("Podcast not found");
+        }
+        const data = await response.json();
+
+        if (!data.seasons || data.seasons.length === 0) {
+          throw new Error("No seasons available for this podcast.");
+        }
+
+        const count = data.seasons.reduce(
+          (sum, season) => sum + season.episodes.length,
+          0
+        );
+        setOnEpisodeCount(count);
+        setPodcast(data);
+        setSelectedSeason(data.seasons[0]?.season);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
       }
-      const data = await response.json();
-
-      const count = data.seasons.reduce(
-        (sum, season) => sum + season.episodes.length,
-        0
-      );
-      setOnEpisodeCount(count);
-
-      setPodcast(data);
-      setSelectedSeason(data.seasons[0]?.season);
-      setLoading(false);
     }
+
     loadPodcast();
   }, [id]);
 
   if (loading)
-    return <div className="p-6 text-3xl text-Podcast-card">Loading...</div>;
+    return (
+      <div className="p-6 text-3xl text-center text-Podcast-card">
+        Loading podcast...
+      </div>
+    );
+
+  if (error)
+    return (
+      <div className="p-6 text-3xl text-center text-red-500">
+        Error: {error}
+      </div>
+    );
+
   if (!podcast)
     return (
-      <div className="p-6 text-3xl text-Podcast-card">Podcast Not Found...</div>
+      <div className="p-6 text-3xl text-center text-Podcast-card">
+        No podcast data found.
+      </div>
     );
 
   return (

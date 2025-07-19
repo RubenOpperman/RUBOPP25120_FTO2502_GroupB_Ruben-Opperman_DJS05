@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Routes, Route, Link, useLocation } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 
 import Layout from "./components/Layout";
 import MainContent from "./components/mainContent";
@@ -19,7 +19,10 @@ function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;
 
-  const handleNavChange = (data) => setSearch(data);
+  const handleNavChange = (data) => {
+    setSearch(data);
+    setCurrentPage(1);
+  };
 
   const handleGenreFilter = (data) => {
     setGenre(data);

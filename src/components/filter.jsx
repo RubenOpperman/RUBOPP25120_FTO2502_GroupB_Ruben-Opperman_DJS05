@@ -26,6 +26,7 @@ export default function Filter({ genreFilter, onSortChange, sort, genre }) {
           name="genre"
           id="genre"
           value={genre}
+          className="outline-none cursor-pointer"
         >
           <option value="">ALL</option>
           <option value="Personal Growth">Personal Growth</option>
@@ -48,7 +49,13 @@ export default function Filter({ genreFilter, onSortChange, sort, genre }) {
         className="border-2 bg-white py-2 px-4 rounded-2xl"
       >
         <label htmlFor="sort">SORT:</label>
-        <select onChange={handleSortPicked} name="sort" id="sort" value={sort}>
+        <select
+          onChange={handleSortPicked}
+          name="sort"
+          id="sort"
+          value={sort}
+          className="outline-none cursor-pointer"
+        >
           <option value="sort">NONE</option>
           <option value="A-Z">A-Z</option>
           <option value="Z-A">Z-A</option>

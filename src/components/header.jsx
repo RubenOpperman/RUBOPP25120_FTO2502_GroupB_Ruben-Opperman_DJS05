@@ -35,16 +35,16 @@ export default function Navbar({ onChange, search }) {
 
   return (
     <>
-      <nav className="w-full h-[10wh] bg-NavBar-bg text-Podcast-card flex items-center  font-serif flex-wrap">
+      <nav className="w-full h-[10wh] bg-NavBar-bg  text-Podcast-card flex items-center  font-serif flex-wrap">
         <div>
           <img src="../src/assets/apple-podcast.svg" alt="podcast icon" />
         </div>
         <div className="text-2xl p-5 font-bold">PodcastAPP</div>
 
-        <div className="ml-auto px-10 cursor-pointer flex gap-5 sm:mb-0 mb-4   ">
+        <div className="ml-auto px-10  flex gap-5 sm:mb-0 mb-4   ">
           {/* Search input field (hidden/shown) */}
           <div
-            className={`border-2 border-white rounded-2xl py-1 px-2 ${
+            className={`border-2 border-white  rounded-2xl py-1 px-2 ${
               !searchBar ? "hidden" : null
             }  `}
           >
@@ -59,7 +59,7 @@ export default function Navbar({ onChange, search }) {
                 id="search"
                 type="text"
                 placeholder="search podcast title"
-                className="outline-none"
+                className="outline-none cursor-pointer"
               />
             </form>
           </div>
@@ -68,6 +68,7 @@ export default function Navbar({ onChange, search }) {
             <img
               src="src/assets/585e4ae1cb11b227491c3393.png"
               alt="search icon"
+              className=" cursor-pointer  "
             />
           </button>
         </div>
