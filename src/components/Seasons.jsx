@@ -110,11 +110,11 @@ export default function Seasons({ id, setOnEpisodeCount }) {
           </form>
         </div>
         <div className=" border-gray-400 border-2 rounded-xl bg-Podcast-card shadow-lg">
-          <div className="  p-4 flex flex-wrap rounded-lg font-serif gap-4 mb-10">
+          <div className="  p-4 flex flex-wrap   sm:flex-nowrap rounded-lg font-serif gap-4 mb-10">
             <img
               src={podcast.seasons[selectedSeason - 1].image}
               alt="podcast img"
-              className="w-[10vw] rounded-2xl "
+              className="w-[10vw] rounded-2xl object-cover shrink-0 min-w-25"
             />
 
             <div>
