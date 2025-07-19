@@ -1,3 +1,23 @@
+/**
+ * Episodes Component
+ *
+ * Displays a list of episodes for a selected season, including episode titles,
+ * descriptions, and a shared season image thumbnail.
+ *
+ * @component
+ * @param {Object} props - Component props
+ * @param {Array<Object>} props.season - An array of episode objects for the selected season.
+ * Each episode object should contain:
+ *   @param {number} episode.episode - The episode number.
+ *   @param {string} episode.title - The episode title.
+ *   @param {string} episode.description - The episode description.
+ * @param {string} props.seasonImg - A URL to the image representing the season.
+ *
+ * @example
+ * <Episodes season={selectedSeason.episodes} seasonImg={selectedSeason.image} />
+ *
+ * @returns {JSX.Element} A rendered list of podcast episodes.
+ */
 export default function Episodes({ season, seasonImg }) {
   return (
     <>

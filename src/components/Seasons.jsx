@@ -1,6 +1,17 @@
 import React from "react";
 import Episodes from "./Episodes";
 
+/**
+ * Seasons component fetches and displays podcast seasons and their episodes.
+ * It allows the user to select a season from a dropdown and displays info about
+ * the selected season along with the episodes.
+ *
+ * @param {Object} props - Component props.
+ * @param {string} props.id - The podcast ID used to fetch podcast data.
+ * @param {(count: number) => void} props.setOnEpisodeCount - Callback to set total episode count in the parent.
+ *
+ * @returns {JSX.Element} The rendered Seasons component.
+ */
 export default function Seasons({ id, setOnEpisodeCount }) {
   const [loading, setLoading] = React.useState(true);
   const [podcast, setPodcast] = React.useState(null);

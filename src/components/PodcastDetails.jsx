@@ -6,6 +6,17 @@ import { useState } from "react";
 
 import Seasons from "./Seasons";
 
+/**
+ * PodcastDetail component displays detailed information for a specific podcast,
+ * including title, description, genres, last updated date, total seasons, and
+ * total episodes. It uses the podcast ID from the URL params to find the podcast
+ * in the provided data array.
+ *
+ * @param {Object} props - Component props.
+ * @param {Array<Object>} props.data - Array of podcast objects.
+ *
+ * @returns {JSX.Element} The rendered podcast detail page.
+ */
 export default function PodcastDetail({ data }) {
   const { id } = useParams();
 

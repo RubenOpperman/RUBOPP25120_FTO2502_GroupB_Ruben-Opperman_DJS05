@@ -1,3 +1,14 @@
+/**
+ * Filter component for selecting podcast genre and sort order.
+ *
+ * @param {Object} props - Component props.
+ * @param {(selectedGenre: string) => void} props.genreFilter - Callback function called when a genre is selected.
+ * @param {(selectedSort: string) => void} props.onSortChange - Callback function called when a sort option is selected.
+ * @param {string} props.sort - Current selected sort value.
+ * @param {string} props.genre - Current selected genre value.
+ *
+ * @returns {JSX.Element} The rendered Filter component.
+ */
 export default function Filter({ genreFilter, onSortChange, sort, genre }) {
   const handleGenrePicked = (e) => {
     const selectedGenre = e.target.value;
