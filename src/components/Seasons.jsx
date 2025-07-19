@@ -1,7 +1,7 @@
 import React from "react";
 import Episodes from "./Episodes";
 
-export default function Seasons({ id }) {
+export default function Seasons({ id, setOnEpisodeCount }) {
   const [loading, setLoading] = React.useState(true);
   const [podcast, setPodcast] = React.useState(null);
   const [selectedSeason, setSelectedSeason] = React.useState(null);
@@ -9,7 +9,6 @@ export default function Seasons({ id }) {
   function handleSelectedSeason(event) {
     const seasonId = Number(event.target.value);
     setSelectedSeason(seasonId);
-    console.log("Selected Season ID:", seasonId);
   }
 
   React.useEffect(() => {
@@ -20,6 +19,13 @@ export default function Seasons({ id }) {
         throw new Error("podcast not found");
       }
       const data = await response.json();
+
+      const count = data.seasons.reduce(
+        (sum, season) => sum + season.episodes.length,
+        0
+      );
+      setOnEpisodeCount(count);
+
       setPodcast(data);
       setSelectedSeason(data.seasons[0]?.season);
       setLoading(false);
@@ -27,8 +33,12 @@ export default function Seasons({ id }) {
     loadPodcast();
   }, [id]);
 
-  if (loading) return <div className="p-6">Loading...</div>;
-  if (!podcast) return <div className="p-6">Podcast Not Found...</div>;
+  if (loading)
+    return <div className="p-6 text-3xl text-Podcast-card">Loading...</div>;
+  if (!podcast)
+    return (
+      <div className="p-6 text-3xl text-Podcast-card">Podcast Not Found...</div>
+    );
 
   return (
     <>

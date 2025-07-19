@@ -1,6 +1,4 @@
 export default function Episodes({ season, seasonImg }) {
-  const Img = seasonImg;
-
   return (
     <>
       {season.map((episode) => (

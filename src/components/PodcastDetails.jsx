@@ -2,11 +2,15 @@ import { useParams, Link } from "react-router-dom";
 import Genres from "./genres";
 import { genres } from "../data/genreData";
 import GetGenreIds from "../utils/getGenreIds";
+import { useState } from "react";
 
 import Seasons from "./Seasons";
 
 export default function PodcastDetail({ data }) {
   const { id } = useParams();
+
+  const [onEpisodeCount, setOnEpisodeCount] = useState(0);
+
   const podcast = data.find((p) => p.id === id);
 
   if (!podcast) return <div className="p-4">Podcast not found</div>;
@@ -58,13 +62,13 @@ export default function PodcastDetail({ data }) {
 
               <div className=" flex-wrap  mb-4">
                 <p className="text-secondary-font-color">TOTAL EPISODES</p>
-                <p>{}</p>
+                <p className="font-bold">{onEpisodeCount} Episodes</p>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <Seasons id={id} />
+      <Seasons id={id} setOnEpisodeCount={setOnEpisodeCount} />
     </div>
   );
 }
