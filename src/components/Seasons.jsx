@@ -71,14 +71,14 @@ export default function Seasons({ id, setOnEpisodeCount }) {
   return (
     <>
       <div>
-        <div className="flex">
-          <div className="text-white text-3xl">Current Season</div>
+        <div className="flex flex-wrap">
+          <div className="text-white text-3xl mb-5">Current Season</div>
 
-          <form className=" pr-10 ml-auto ">
+          <form className=" pr-10 sm:ml-auto ml-auto ">
             <select
               name="season"
               id="season"
-              className="mb-4 p-2 border rounded bg-Podcast-card"
+              className="mb-4 p-2 border sm:w-full w-40   rounded bg-Podcast-card"
               onChange={handleSelectedSeason}
             >
               {podcast.seasons.map((season) => (
@@ -90,7 +90,7 @@ export default function Seasons({ id, setOnEpisodeCount }) {
           </form>
         </div>
         <div className=" border-gray-400 border-2 rounded-xl bg-Podcast-card shadow-lg">
-          <div className="  p-4 flex rounded-lg font-serif gap-4 mb-10">
+          <div className="  p-4 flex flex-wrap rounded-lg font-serif gap-4 mb-10">
             <img
               src={podcast.seasons[selectedSeason - 1].image}
               alt="podcast img"
@@ -102,7 +102,7 @@ export default function Seasons({ id, setOnEpisodeCount }) {
                 Season {selectedSeason}:{" "}
                 {podcast.seasons[selectedSeason - 1].title}
               </h1>
-              <p className="line-clamp-1 text-lg text-Font-primary-color mb-3">
+              <p className="line-clamp-1 sm:text-lg text-md text-Font-primary-color mb-3">
                 {podcast.description}
               </p>
               <div className="flex gap-10 text-secondary-font-color text-md font-medium ">

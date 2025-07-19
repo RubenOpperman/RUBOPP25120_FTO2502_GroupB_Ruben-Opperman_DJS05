@@ -25,11 +25,11 @@ export default function PodcastDetail({ data }) {
       >
         ←
       </Link>
-      <div className="flex my-10 border-2 gap-5 p-10 rounded-lg  border-gray-400 bg-Podcast-card shadow-lg font-serif">
+      <div className="flex flex-wrap my-10 border-2 gap-5 p-10 rounded-lg  border-gray-400 bg-Podcast-card shadow-lg font-serif">
         <img
           src={podcast.image}
           alt={podcast.title}
-          className="w-100 h-100 object-cover rounded-2xl "
+          className="md:w-100 md:h-100 w-60 h-60 object-cover rounded-2xl "
         />
 
         <div>
