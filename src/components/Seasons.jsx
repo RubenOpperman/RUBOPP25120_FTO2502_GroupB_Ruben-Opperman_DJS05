@@ -18,10 +18,19 @@ export default function Seasons({ id, setOnEpisodeCount }) {
   const [selectedSeason, setSelectedSeason] = React.useState(null);
   const [error, setError] = React.useState();
 
+  /**
+   * Handles changing the selected season when user picks a season from dropdown.
+   * @param {React.ChangeEvent<HTMLSelectElement>} e - The change event from the select element.
+   */
   function handleSelectedSeason(e) {
     const seasonId = Number(e.target.value);
     setSelectedSeason(seasonId);
   }
+  /**
+   * Fetches podcast data when the podcast ID changes. It updates loading state,
+   * sets the podcast data, handles errors, counts total episodes, and sets the
+   * initially selected season.
+   */
 
   React.useEffect(() => {
     async function loadPodcast() {

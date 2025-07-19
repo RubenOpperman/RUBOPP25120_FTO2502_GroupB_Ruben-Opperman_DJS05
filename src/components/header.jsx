@@ -29,6 +29,9 @@ export default function Navbar({ onChange, search }) {
   function ToggleSearch() {
     setSearchBar((prevSearchBarState) => !prevSearchBarState);
   }
+  /**
+   * Checks if there are characters in the search bar and if there is then the search bar is open
+   */
   useEffect(() => {
     if (search !== "") setSearchBar(true);
   }, [search]);

@@ -15,6 +15,10 @@ export default function Filter({ genreFilter, onSortChange, sort, genre }) {
     genreFilter(selectedGenre);
   };
 
+  /**
+   * Handles the change event for sort selection and calls the parent callback.
+   * @param {React.ChangeEvent<HTMLSelectElement>} e - The change event from the sort select element.
+   */
   const handleSortPicked = (e) => {
     const selectedSort = e.target.value;
     onSortChange(selectedSort);
